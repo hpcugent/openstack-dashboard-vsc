@@ -25,12 +25,12 @@
 %define dashboardpath /usr/share/openstack-dashboard/openstack_dashboard/local
 %define vscpanelpath %{dashboardpath}/vsc
 %define localsettings %{dashboardpath}/local_settings.d
-%define imagespath /usr/share/openstack-dashboard/static/dashboard/img
+%define imagespath /usr/share/openstack-dashboard/openstack_dashboard/themes/default/img
 
 Summary: VSC OpenStack dashboard
 Name: openstack-dashboard-vsc
 Version: 1.0
-Release: 4%{?dist}
+Release: 6%{?dist}
 License: GPLv2
 Group: Applications/System
 URL: https://www.vscentrum.be/
@@ -60,9 +60,9 @@ mkdir -p $RPM_BUILD_ROOT%{imagespath}
 install -m 0644 panels/_00_vsc.py $RPM_BUILD_ROOT%{localsettings}/_00_vsc.py
 install -m 0644 panels/__init__.py $RPM_BUILD_ROOT%{vscpanelpath}/__init__.py
 install -m 0644 panels/_disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_disabled.py
-install -m 0644 img/favicon-vsc.ico $RPM_BUILD_ROOT%{imagespath}/favicon-vsc.ico
-install -m 0644 img/logo-splash-vsc.svg $RPM_BUILD_ROOT%{imagespath}/logo-splash-vsc.svg
-install -m 0644 img/logo-vsc.svg $RPM_BUILD_ROOT%{imagespath}/logo-vsc.svg
+install -m 0644 img/favicon.ico $RPM_BUILD_ROOT%{imagespath}/favicon.ico
+install -m 0644 img/logo-splash.svg $RPM_BUILD_ROOT%{imagespath}/logo-splash.svg
+install -m 0644 img/logo.svg $RPM_BUILD_ROOT%{imagespath}/logo.svg
 
 # Disabled tabs
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1360_project_volume_groups.py
@@ -75,9 +75,7 @@ ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9050_manila_project_add_secur
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9080_manila_project_add_share_groups_panel_to_share_panel_group.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9085_manila_project_add_share_group_snapshots_panel_to_share_panel_group.py
 
-
 %post
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -86,9 +84,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 
 %{localsettings}/_00_vsc.py
-
 %{vscpanelpath}/__init__.py
 %{vscpanelpath}/_disabled.py
+
 %{vscpanelpath}/_1360_project_volume_groups.py
 %{vscpanelpath}/_1370_project_vg_snapshots.py
 %{vscpanelpath}/_1440_project_routers_panel.py
@@ -99,9 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{vscpanelpath}/_9080_manila_project_add_share_groups_panel_to_share_panel_group.py
 %{vscpanelpath}/_9085_manila_project_add_share_group_snapshots_panel_to_share_panel_group.py
 
-%{imagespath}/favicon-vsc.ico
-%{imagespath}/logo-splash-vsc.svg
-%{imagespath}/logo-vsc.svg
+%{imagespath}/favicon.ico
+%{imagespath}/logo-splash.svg
+%{imagespath}/logo.svg
 
 %attr(0755, root, root) %dir %{vscpanelpath}
 %attr(0755, root, root) %dir %{localsettings}

@@ -30,7 +30,7 @@
 Summary: VSC OpenStack dashboard
 Name: openstack-dashboard-vsc
 Version: 1.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPLv2
 Group: Applications/System
 URL: https://www.vscentrum.be/
@@ -64,18 +64,19 @@ install -m 0644 img/favicon-vsc.ico $RPM_BUILD_ROOT%{imagespath}/favicon-vsc.ico
 install -m 0644 img/logo-splash-vsc.svg $RPM_BUILD_ROOT%{imagespath}/logo-splash-vsc.svg
 install -m 0644 img/logo-vsc.svg $RPM_BUILD_ROOT%{imagespath}/logo-vsc.svg
 
+# Disabled tabs
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1360_project_volume_groups.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1370_project_vg_snapshots.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1440_project_routers_panel.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1490_project_floating_ips_panel.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9020_manila_project_add_share_snapshots_panel_to_share_panel_group.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9040_manila_project_add_share_networks_panel_to_share_panel_group.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9050_manila_project_add_security_services_panel_to_share_panel_group.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9080_manila_project_add_share_groups_panel_to_share_panel_group.py
+ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9085_manila_project_add_share_group_snapshots_panel_to_share_panel_group.py
+
 
 %post
-# Create symbolic links
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_1360_project_volume_groups.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_1370_project_vg_snapshots.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_1440_project_routers_panel.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_1490_project_floating_ips_panel.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_9020_manila_project_add_share_snapshots_panel_to_share_panel_group.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_9040_manila_project_add_share_networks_panel_to_share_panel_group.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_9050_manila_project_add_security_services_panel_to_share_panel_group.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_9080_manila_project_add_share_groups_panel_to_share_panel_group.py
-ln -s -f %{vscpanelpath}/_disabled.py %{vscpanelpath}/_9085_manila_project_add_share_group_snapshots_panel_to_share_panel_group.py
 
 
 %clean
@@ -85,8 +86,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 
 %{localsettings}/_00_vsc.py
+
 %{vscpanelpath}/__init__.py
 %{vscpanelpath}/_disabled.py
+%{vscpanelpath}/_1360_project_volume_groups.py
+%{vscpanelpath}/_1370_project_vg_snapshots.py
+%{vscpanelpath}/_1440_project_routers_panel.py
+%{vscpanelpath}/_1490_project_floating_ips_panel.py
+%{vscpanelpath}/_9020_manila_project_add_share_snapshots_panel_to_share_panel_group.py
+%{vscpanelpath}/_9040_manila_project_add_share_networks_panel_to_share_panel_group.py
+%{vscpanelpath}/_9050_manila_project_add_security_services_panel_to_share_panel_group.py
+%{vscpanelpath}/_9080_manila_project_add_share_groups_panel_to_share_panel_group.py
+%{vscpanelpath}/_9085_manila_project_add_share_group_snapshots_panel_to_share_panel_group.py
+
 %{imagespath}/favicon-vsc.ico
 %{imagespath}/logo-splash-vsc.svg
 %{imagespath}/logo-vsc.svg
@@ -94,12 +106,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(0755, root, root) %dir %{vscpanelpath}
 %attr(0755, root, root) %dir %{localsettings}
 %attr(0755, root, root) %dir %{imagespath}
-
-# Directories
-%{vscpanelpath}
-%{localsettings}
-%{imagespath}
-
 
 %changelog
 * Thu Feb 7 2019 Álvaro Simón <Alvaro.SimonGarcia@UGent.be>

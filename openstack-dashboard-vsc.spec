@@ -30,7 +30,7 @@
 Summary: VSC OpenStack dashboard
 Name: openstack-dashboard-vsc
 Version: 1.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: GPLv2
 Group: Applications/System
 URL: https://www.vscentrum.be/
@@ -68,7 +68,6 @@ install -m 0644 img/logo.svg $RPM_BUILD_ROOT%{imagespath}/logo.svg
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1360_project_volume_groups.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1370_project_vg_snapshots.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1440_project_routers_panel.py
-ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_1490_project_floating_ips_panel.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9020_manila_project_add_share_snapshots_panel_to_share_panel_group.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9040_manila_project_add_share_networks_panel_to_share_panel_group.py
 ln -s _disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_9050_manila_project_add_security_services_panel_to_share_panel_group.py
@@ -90,7 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %{vscpanelpath}/_1360_project_volume_groups.py
 %{vscpanelpath}/_1370_project_vg_snapshots.py
 %{vscpanelpath}/_1440_project_routers_panel.py
-%{vscpanelpath}/_1490_project_floating_ips_panel.py
 %{vscpanelpath}/_9020_manila_project_add_share_snapshots_panel_to_share_panel_group.py
 %{vscpanelpath}/_9040_manila_project_add_share_networks_panel_to_share_panel_group.py
 %{vscpanelpath}/_9050_manila_project_add_security_services_panel_to_share_panel_group.py

@@ -104,7 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 %{imagespath}/logo.svg
 
 %attr(0755, root, root) %dir %{vscpanelpath}
-%attr(0755, root, root) %dir %{localsettings}
 %attr(0755, root, root) %dir %{imagespath}
 
 %changelog

@@ -23,6 +23,7 @@
 %{!?_rel:%{expand:%%global _rel 2}}
 
 %define dashboardpath /usr/share/openstack-dashboard/openstack_dashboard/local
+%define dashboardconf /etc/openstack-dashboard/local_settings.d
 %define vscpanelpath %{dashboardpath}/vsc
 %define localsettings %{dashboardpath}/local_settings.d
 %define imagespath /usr/share/openstack-dashboard/openstack_dashboard/themes/default/img
@@ -30,7 +31,7 @@
 Summary: VSC OpenStack dashboard
 Name: openstack-dashboard-vsc
 Version: 1.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: GPLv2
 Group: Applications/System
 URL: https://www.vscentrum.be/
@@ -56,8 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{vscpanelpath}
 mkdir -p $RPM_BUILD_ROOT%{localsettings}
 mkdir -p $RPM_BUILD_ROOT%{imagespath}
+mkdir -p $RPM_BUILD_ROOT%{dashboardconf}
 
 install -m 0644 panels/_00_vsc.py $RPM_BUILD_ROOT%{localsettings}/_00_vsc.py
+install -m 0644 panels/_12_vsc_theme.py $RPM_BUILD_ROOT%{dashboardconf}/_12_vsc_theme.py
 install -m 0644 panels/__init__.py $RPM_BUILD_ROOT%{vscpanelpath}/__init__.py
 install -m 0644 panels/_disabled.py $RPM_BUILD_ROOT%{vscpanelpath}/_disabled.py
 install -m 0644 img/favicon.ico $RPM_BUILD_ROOT%{imagespath}/favicon.ico
@@ -83,6 +86,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 
 %{localsettings}/_00_vsc.py
+%{dashboardconf}/_12_vsc_theme.py
 %{vscpanelpath}/__init__.py
 %{vscpanelpath}/_disabled.py
 
@@ -100,7 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 %{imagespath}/logo.svg
 
 %attr(0755, root, root) %dir %{vscpanelpath}
-%attr(0755, root, root) %dir %{localsettings}
 %attr(0755, root, root) %dir %{imagespath}
 
 %changelog
